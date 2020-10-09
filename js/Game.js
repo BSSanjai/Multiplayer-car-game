@@ -4,6 +4,7 @@ this.carImage1 = loadImage("images/car1.png");
 this.carImage2 = loadImage("images/car2.png");
 this.carImage3 = loadImage("images/car3.png");
 this.carImage4 = loadImage("images/car4.png");
+this.trackImage = loadImage("images/track.jpg");
   }
 
   getState(){
@@ -35,7 +36,7 @@ this.carImage4 = loadImage("images/car4.png");
       form.display();
     }
 
-    car1 = createSprite(100,200);
+    car1 = createSprite(900,200);
     car1.addImage(this.carImage1);
     car2 = createSprite(300,200);
     car2.addImage(this.carImage2);
@@ -48,7 +49,7 @@ this.carImage4 = loadImage("images/car4.png");
 
   play(){
     form.hide();
-
+    image(this.trackImage,0,-displayHeight*4,displayWidth,displayHeight*5);
     Player.getPlayerInfo();
     
     if(allPlayers !== undefined){
@@ -56,9 +57,12 @@ this.carImage4 = loadImage("images/car4.png");
       
       //index of the array
       var index = 0;
+if(player.distance>(displayHeight*5)-150){
+console.log("Winner!!");
 
+}
       //x and y position of the cars
-      var x = 0;
+      var x = 200;
       var y;
 
       for(var plr in allPlayers){
@@ -88,7 +92,10 @@ this.carImage4 = loadImage("images/car4.png");
       player.distance +=10
       player.update();
     }
-
+    if(keyIsDown(DOWN_ARROW) && player.index !== null){
+      player.distance -=10
+      player.update();
+    }
     drawSprites();
   }
 }
